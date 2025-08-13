@@ -3,37 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Tracker PWA</title>
-    <link rel="stylesheet" href="style.css">
+    <title>My Study Tracker PWA</title>
     <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#333">
 </head>
 <body>
-
     <header>
-        <h1>Study Tracker</h1>
+        <h1>My Study Tracker</h1>
     </header>
 
     <main>
-        <form id="student-form">
-            <div class="form-group">
-                <label for="student-name">Student Name:</label>
-                <input type="text" id="student-name" required>
-            </div>
-            <div class="form-group">
-                <label for="student-mark">Mark:</label>
-                <input type="number" id="student-mark" required>
-            </div>
-            <button type="submit">Add Student</button>
-        </form>
+        <section class="form-container">
+            <h2>Add Student Marks</h2>
+            <form id="student-form">
+                <div class="form-group">
+                    <label for="student-name">Student Name:</label>
+                    <input type="text" id="student-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject-select">Subject:</label>
+                    <select id="subject-select" required>
+                        <option value="">Select Subject</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Science">Science</option>
+                        <option value="History">History</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="term-select">Term:</label>
+                    <select id="term-select" required>
+                        <option value="">Select Term</option>
+                        <option value="First Term">First Term</option>
+                        <option value="Second Term">Second Term</option>
+                        <option value="Final Term">Final Term</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="assessment-select">Assessment:</label>
+                    <select id="assessment-select" required>
+                        <option value="">Select Assessment</option>
+                        <option value="Weekly Quiz">Weekly Quiz</option>
+                        <option value="Monthly Assessment">Monthly Assessment</option>
+                        <option value="Midterm">Midterm</option>
+                        <option value="End of Term">End of Term</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="student-mark">Mark:</label>
+                    <input type="number" id="student-mark" required>
+                </div>
+                <button type="submit">Add/Update Mark</button>
+            </form>
+        </section>
 
-        <section id="student-list">
-            <h2>Student Marks</h2>
-            <table>
+        <section class="records-container">
+            <h2>Student Records</h2>
+            <table id="records-table">
                 <thead>
                     <tr>
-                        <th>Student Name</th>
-                        <th>Mark</th>
-                        <th>Actions</th>
+                        <th rowspan="2">Student Name</th>
+                        <th colspan="4">Mathematics - First Term</th>
+                        <th colspan="4">Mathematics - Second Term</th>
+                        <th colspan="4">Mathematics - Final Term</th>
+                        <th colspan="4">Science - First Term</th>
+                        <th colspan="4">Science - Second Term</th>
+                        <th colspan="4">Science - Final Term</th>
+                        <th colspan="4">History - First Term</th>
+                        <th colspan="4">History - Second Term</th>
+                        <th colspan="4">History - Final Term</th>
+                        <th rowspan="2">Percentage</th>
+                        <th rowspan="2">Grade</th>
+                        <th rowspan="2">Actions</th>
+                    </tr>
+                    <tr>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
                     </tr>
                 </thead>
                 <tbody id="students-table-body">
@@ -49,7 +101,7 @@
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js')
                 .then(reg => console.log('Service Worker: Registered'))
-                .catch(err => console.log(`Service Worker: Error: ${err}`));
+                .catch(err => console.log('Service Worker: Error: ', err));
             });
         }
     </script>
