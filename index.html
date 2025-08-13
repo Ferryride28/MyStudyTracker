@@ -22,12 +22,37 @@
                     <input type="text" id="student-name" required>
                 </div>
                 <div class="form-group">
+                    <label for="student-grade-level">Student Year/Grade:</label>
+                    <select id="student-grade-level" required>
+                        <option value="">Select Year/Grade</option>
+                        <option value="Year 1">Year 1</option>
+                        <option value="Year 2">Year 2</option>
+                        <option value="Year 3">Year 3</option>
+                        <option value="Year 4">Year 4</option>
+                        <option value="Year 5">Year 5</option>
+                        <option value="Year 6">Year 6</option>
+                        <option value="Year 7">Year 7</option>
+                        <option value="Year 8">Year 8</option>
+                        <option value="Year 9">Year 9</option>
+                        <option value="Year 10">Year 10</option>
+                        <option value="Year 11">Year 11</option>
+                        <option value="Year 12">Year 12</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="subject-select">Subject:</label>
                     <select id="subject-select" required>
                         <option value="">Select Subject</option>
                         <option value="Mathematics">Mathematics</option>
                         <option value="Science">Science</option>
                         <option value="History">History</option>
+                        <option value="Urdu">Urdu</option>
+                        <option value="Arabic">Arabic</option>
+                        <option value="Islamic Studies">Islamic Studies</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Chemistry">Chemistry</option>
+                        <option value="Biology">Biology</option>
+                        <option value="Computer Science">Computer Science</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -53,6 +78,10 @@
                     <label for="student-mark">Mark:</label>
                     <input type="number" id="student-mark" required>
                 </div>
+                <div class="form-group">
+                    <label for="total-mark">Total Marks:</label>
+                    <input type="number" id="total-mark" required>
+                </div>
                 <button type="submit">Add/Update Mark</button>
             </form>
         </section>
@@ -63,6 +92,7 @@
                 <thead>
                     <tr>
                         <th rowspan="2">Student Name</th>
+                        <th rowspan="2">Student Year/Grade</th>
                         <th colspan="4">Mathematics - First Term</th>
                         <th colspan="4">Mathematics - Second Term</th>
                         <th colspan="4">Mathematics - Final Term</th>
@@ -72,11 +102,51 @@
                         <th colspan="4">History - First Term</th>
                         <th colspan="4">History - Second Term</th>
                         <th colspan="4">History - Final Term</th>
+                        <th colspan="4">Urdu - First Term</th>
+                        <th colspan="4">Urdu - Second Term</th>
+                        <th colspan="4">Urdu - Final Term</th>
+                        <th colspan="4">Arabic - First Term</th>
+                        <th colspan="4">Arabic - Second Term</th>
+                        <th colspan="4">Arabic - Final Term</th>
+                        <th colspan="4">Islamic Studies - First Term</th>
+                        <th colspan="4">Islamic Studies - Second Term</th>
+                        <th colspan="4">Islamic Studies - Final Term</th>
+                        <th colspan="4">Physics - First Term</th>
+                        <th colspan="4">Physics - Second Term</th>
+                        <th colspan="4">Physics - Final Term</th>
+                        <th colspan="4">Chemistry - First Term</th>
+                        <th colspan="4">Chemistry - Second Term</th>
+                        <th colspan="4">Chemistry - Final Term</th>
+                        <th colspan="4">Biology - First Term</th>
+                        <th colspan="4">Biology - Second Term</th>
+                        <th colspan="4">Biology - Final Term</th>
+                        <th colspan="4">Computer Science - First Term</th>
+                        <th colspan="4">Computer Science - Second Term</th>
+                        <th colspan="4">Computer Science - Final Term</th>
                         <th rowspan="2">Percentage</th>
                         <th rowspan="2">Grade</th>
                         <th rowspan="2">Actions</th>
                     </tr>
                     <tr>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
+                        <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
                         <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
                         <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
                         <th>W.Q.</th><th>M.A.</th><th>M.T.</th><th>E.T.</th>
