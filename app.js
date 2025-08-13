@@ -5,13 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const studentForm = document.getElementById('student-form');
     const studentsTableBody = document.getElementById('students-table-body');
     const studentNameInput = document.getElementById('student-name');
+    const studentGradeLevelSelect = document.getElementById('student-grade-level');
     const subjectSelect = document.getElementById('subject-select');
     const termSelect = document.getElementById('term-select');
     const assessmentSelect = document.getElementById('assessment-select');
     const studentMarkInput = document.getElementById('student-mark');
+    const totalMarkInput = document.getElementById('total-mark'); // New element
     
     // Define the structure and settings
-    const subjects = ["Mathematics", "Science", "History"];
+    const subjects = ["Mathematics", "Science", "History", "Urdu", "Arabic", "Islamic Studies", "Physics", "Chemistry", "Biology", "Computer Science"];
     const assessments = ["Weekly Quiz", "Monthly Assessment", "Midterm", "End of Term"];
     const terms = ["First Term", "Second Term", "Final Term"];
 
@@ -19,8 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to calculate percentage and grade
     function calculateFinals(student) {
-        let totalMarks = 0;
-        let totalAssessments = 0;
+        let totalStudentMarks = 0;
+        let totalPossibleMarks = 0;
 
         subjects.forEach(subjectName => {
             const subject = student.subjects[subjectName];
@@ -30,8 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (term) {
                         assessments.forEach(assessmentName => {
                             if (term[assessmentName] !== undefined) {
-                                totalMarks += term[assessmentName];
-                                totalAssessments++;
+                                totalStudentMarks += term[assessmentName].mark;
+                                totalPossibleMarks += term[assessmentName].total;
                             }
                         });
                     }
@@ -39,11 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        if (totalAssessments === 0) {
+        if (totalPossibleMarks === 0) {
             return { percentage: 0, grade: 'N/A' };
         }
 
-        const percentage = (totalMarks / (totalAssessments * 100)) * 100;
+        const percentage = (totalStudentMarks / totalPossibleMarks) * 100;
         let grade = 'N/A';
 
         if (percentage >= 90) grade = 'A';
@@ -60,13 +62,17 @@ document.addEventListener('DOMContentLoaded', () => {
         studentsTableBody.innerHTML = '';
         students.forEach((student, index) => {
             const row = document.createElement('tr');
-            let studentDataHtml = `<td>${student.name}</td>`;
+            let studentDataHtml = `<td>${student.name}</td><td>${student.gradeLevel}</td>`;
             
             subjects.forEach(subjectName => {
                 terms.forEach(termName => {
                     assessments.forEach(assessmentName => {
-                        const mark = student.subjects[subjectName]?.marks[termName]?.[assessmentName];
-                        studentDataHtml += `<td>${mark !== undefined ? mark : '-'}</td>`;
+                        const markData = student.subjects[subjectName]?.marks[termName]?.[assessmentName];
+                        if (markData) {
+                            studentDataHtml += `<td>${markData.mark}/${markData.total}</td>`;
+                        } else {
+                            studentDataHtml += `<td>-</td>`;
+                        }
                     });
                 });
             });
@@ -97,16 +103,19 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault(); 
         
         const name = studentNameInput.value.trim();
+        const gradeLevel = studentGradeLevelSelect.value;
         const subject = subjectSelect.value;
         const term = termSelect.value;
         const assessment = assessmentSelect.value;
         const mark = parseInt(studentMarkInput.value);
+        const total = parseInt(totalMarkInput.value); // New value
 
         // Find existing student or create a new one
         let existingStudent = students.find(s => s.name === name);
         if (!existingStudent) {
             existingStudent = {
                 name: name,
+                gradeLevel: gradeLevel,
                 subjects: {}
             };
             students.push(existingStudent);
@@ -120,18 +129,23 @@ document.addEventListener('DOMContentLoaded', () => {
             existingStudent.subjects[subject].marks[term] = {};
         }
 
-        // Add/update the mark
-        existingStudent.subjects[subject].marks[term][assessment] = mark;
+        // Add/update the mark and total
+        existingStudent.subjects[subject].marks[term][assessment] = {
+            mark: mark,
+            total: total
+        };
 
         saveStudents();
         renderStudents();
 
         // Clear form fields
         studentNameInput.value = '';
+        studentGradeLevelSelect.value = '';
         subjectSelect.value = '';
         termSelect.value = '';
         assessmentSelect.value = '';
         studentMarkInput.value = '';
+        totalMarkInput.value = '';
     });
 
     // Handle button clicks (edit and delete)
@@ -147,7 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.classList.contains('edit-btn')) {
             const studentToEdit = students[index];
             studentNameInput.value = studentToEdit.name;
-            // Note: For a real app, you would also populate the select menus
+            studentGradeLevelSelect.value = studentToEdit.gradeLevel;
+            // Note: For a real app, you would also populate the other select menus
         }
     });
 
