@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Tracker PWA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+    <header>
+        <h1>Study Tracker</h1>
+    </header>
+
+    <main>
+        <form id="student-form">
+            <div class="form-group">
+                <label for="student-name">Student Name:</label>
+                <input type="text" id="student-name" required>
+            </div>
+            <div class="form-group">
+                <label for="student-mark">Mark:</label>
+                <input type="number" id="student-mark" required>
+            </div>
+            <button type="submit">Add Student</button>
+        </form>
+
+        <section id="student-list">
+            <h2>Student Marks</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Mark</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="students-table-body">
+                    </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+        // Register the Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('Service Worker: Registered'))
+                .catch(err => console.log(`Service Worker: Error: ${err}`));
+            });
+        }
+    </script>
+</body>
+</html>
